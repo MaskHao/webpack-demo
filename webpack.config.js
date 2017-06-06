@@ -4,17 +4,18 @@
 const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+var open = require('open');
 
 module.exports = {
      // entry: './src/app/index.js',
-    //context: resolve(__dirname, 'src'),   // 用于从配置中解析入口起点(entry point)和 loader
+    context: path.resolve(__dirname, './src'),   // 用于从配置中解析入口起点(entry point)和 loader
     entry: {
         index: [
-            'react-hot-loader/patch',// 开启 React 代码的模块热替换(HMR)
-            'webpack-dev-server/client?http://localhost:2017',// 为 webpack-dev-server 的环境打包代码  然后连接到指定服务器域名与端口
-            'webpack/hot/only-dev-server',  // 为热替换(HMR)打包好代码  only- 意味着只有成功更新运行代码才会执行热替换(HMR)
-            "./src/app/index",
-            "babel-polyfill"
+             //'react-hot-loader/patch',// 开启 React 代码的模块热替换(HMR)
+            //'webpack-dev-server/client?http://localhost:2017',// 为 webpack-dev-server 的环境打包代码  然后连接到指定服务器域名与端口
+           // 'webpack/hot/dev-server',  // 为热替换(HMR)打包好代码  only- 意味着只有成功更新运行代码才会执行热替换(HMR)
+            "./app/index.js",
+            //"babel-polyfill"
         ],
         // vendor: 'moment'
     },
@@ -23,14 +24,12 @@ module.exports = {
         publicPath: "/assets/",
         // filename: "bundle.js",
         filename: "[name].bundle.js",
+        library: "CANG",
+        libraryTarget: "window",
         // filename: "[name].[chunkhash].js",
         sourceMapFilename: "[file].map"
     },
     module:{
-
-
-
-
         // noParse:/jquery|lodash/,   //防止解析任何与给定正则表达式相匹配的文件
         rules:[
             {test:/\.css/,
@@ -38,7 +37,7 @@ module.exports = {
                 // use: ExtractTextPlugin.extract({
                 //     use: 'css-loader'
                 // })
-                loader: ExtractTextPlugin.extract({fallback: 'style-loader', use: ['css-loader'], publicPath: "/dist"})
+                loader: ExtractTextPlugin.extract({fallback: 'style-loader', use: ['css-loader']})
 
             },
             {test:/\.less/,
@@ -46,7 +45,7 @@ module.exports = {
                 // use: ExtractTextPlugin.extract({
                 //     use: 'css-loader'
                 // })
-                loader: ExtractTextPlugin.extract({fallback: 'style-loader', use: ['css-loader', 'less-loader'], publicPath: "/dist"})
+                loader: ExtractTextPlugin.extract({fallback: 'style-loader', use: ['css-loader', 'less-loader']})
 
             },
             {test:/\.scss/,
@@ -54,7 +53,7 @@ module.exports = {
                 // use: ExtractTextPlugin.extract({
                 //     use: 'css-loader'
                 // })
-                loader: ExtractTextPlugin.extract({fallback: 'style-loader', use: ['css-loader', 'sass-loader'], publicPath: "/dist"})
+                loader: ExtractTextPlugin.extract({fallback: 'style-loader', use: ['css-loader', 'sass-loader']})
 
             },
             {test:/\.ts$/, use:'ts-loader'},
@@ -113,9 +112,9 @@ module.exports = {
 
     devServer: {
         hot:true,        // 开启服务器的模块热替换(HMR)
-       // port:8011,
+        port:2011,
         inline: true, //设置为true，当源文件改变会自动刷新页面
-        compress:true,  //一切服务都启用gzip压缩
+        //compress:true,  //一切服务都启用gzip压缩
         contentBase: [path.resolve(__dirname, "src")],            //服务器从哪里提供内容。只有在你想要提供静态文件时才需要
         historyApiFallback: true,  //在开发单页应用时非常有用，它依赖于HTML5 history API，如果设置为true，所有的跳转将指向index.html
     },
@@ -124,7 +123,10 @@ module.exports = {
         new ExtractTextPlugin({filename: '[name].css', allChunks: true,}),
         new webpack.optimize.CommonsChunkPlugin({
             // name: 'vendor', //指定公共bundle的名字
-            names: ['vendor', 'manifest'] // 指定公共 bundle 的名字。
+            //names: ['vendor', 'manifest'] // 指定公共 bundle 的名字。
+            name: 'shared',
+            filename: 'shared.js',
+            minChunks: 2,
         }),
         // new webpack.optimize.CommonsChunkPlugin( common,common.js),
 
@@ -148,7 +150,7 @@ module.exports = {
             "_": "lodash",
             "classnames": "classnames"
         }),
-        new webpack.NamedModulesPlugin(), // 当模块热替换(HMR)时在浏览器控制台输出对用户更友好的模块名字信息
+       // new webpack.NamedModulesPlugin(), // 当模块热替换(HMR)时在浏览器控制台输出对用户更友好的模块名字信息
 
     ]
 };
