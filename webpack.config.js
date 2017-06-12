@@ -14,8 +14,9 @@ module.exports = {
              //'react-hot-loader/patch',// 开启 React 代码的模块热替换(HMR)
             //'webpack-dev-server/client?http://localhost:2017',// 为 webpack-dev-server 的环境打包代码  然后连接到指定服务器域名与端口
            // 'webpack/hot/dev-server',  // 为热替换(HMR)打包好代码  only- 意味着只有成功更新运行代码才会执行热替换(HMR)
-            "./app/index.js",
-            //"babel-polyfill"
+            "./app/index",
+            "babel-polyfill",
+            "./style/content"
         ],
         // vendor: 'moment'
     },
@@ -24,8 +25,8 @@ module.exports = {
         publicPath: "/assets/",
         // filename: "bundle.js",
         filename: "[name].bundle.js",
-        library: "CANG",
-        libraryTarget: "window",
+        //library: "CANG",
+        //libraryTarget: "window",
         // filename: "[name].[chunkhash].js",
         sourceMapFilename: "[file].map"
     },
@@ -70,10 +71,10 @@ module.exports = {
                 //     presets: ["es2015",'react']
                 // },
             },
-            {
-                test: /\.(png|svg|jpg|gif)$/,
-                use: 'file-loader'
-            },
+            // {
+            //     test: /\.(png|svg|jpg|gif)$/,
+            //     use: 'file-loader'
+            // },
             // {
             //     test: /\.(woff|woff2|eot|ttf|svg)$/,
             //     use: {

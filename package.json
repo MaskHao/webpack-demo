@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "antd": "^2.10.4",
     "babel-preset-env": "^1.5.1",
     "classnames": "^2.2.5",
     "jquery": "^3.2.1",
