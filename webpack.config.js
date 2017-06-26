@@ -107,9 +107,9 @@ module.exports = {
         }
     },
 
-    devtool: "source-map",     // 通过在浏览器调试工具(browser devtools)中添加元信息(meta info)增强调试  牺牲了构建速度的 `source-map' 是最详细的。
+    //devtool: "source-map",     // 通过在浏览器调试工具(browser devtools)中添加元信息(meta info)增强调试  牺牲了构建速度的 `source-map' 是最详细的。
 
-    stats: "errors-only",       // 精确控制要显示的 bundle 信息
+    //stats: "errors-only",       // 精确控制要显示的 bundle 信息
 
     devServer: {
         hot:true,        // 开启服务器的模块热替换(HMR)

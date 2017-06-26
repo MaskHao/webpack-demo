@@ -6,10 +6,9 @@
 @fontColor:#2d3652;
 @titleColor:#9498A6;
 @titleColor2:#6B7185;
+@tableTitleColor:#6B7185;
+@bgc:#E9ECF6;
 
-h1{
-  color: red;
-}
 // 按钮样式
 .btn{
   display: inline-block;
@@ -37,12 +36,12 @@ h1{
 .btn1(){
   color: #ffffff;
   background-color: #5899FC;
-  border-radius: 3px;
+  border-radius: 5px;
   cursor: pointer;
 }
 .btn2(){
   color: #5899FC;
-  border-radius: 3px;
+  border-radius: 5px;
   background-color: #ffffff;
   border:1px solid #5899FC;
   cursor: pointer;
@@ -63,15 +62,36 @@ h1{
   text-align: center;
   border-radius: 50%;
 }
+.img(@w){
+  width:@w;
+  height:@w;
+  border-radius: 50%;
+}
 .iconYellow{ color:#FD8A5C} ;
 
 .title{
   color: #6B7185;
   font-size: 14px;
 }
+//超过一行显示...
+.oneLine{
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+//超过两行显示..,
+.moreLine(@num){
+  overflow:hidden;
+  text-overflow:ellipsis;
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:@num;
+}
+
 textarea{
   resize: none;
 }
+a{color:@fontColor; }
 html,body{
   height: 100%;
 }
@@ -153,8 +173,6 @@ li:after, div:after, ul:after{
   color: #2d3652;
   position: relative;
   a{text-decoration: none;  }
-
-
   .header{
     position: relative;
     top: 0;
@@ -229,7 +247,6 @@ li:after, div:after, ul:after{
   }
 }
 
-
 //提示性弹出框 toast
 .toast{
   position: fixed;
@@ -263,7 +280,7 @@ li:after, div:after, ul:after{
   top: 90px;
   right: -500px;
   bottom: 0;
-  z-index: 998;
+  z-index: 500;
   min-height: 100%;
   width: 500px;
   overflow-y: auto;
@@ -293,6 +310,7 @@ li:after, div:after, ul:after{
   .liLeft{
     float: left;
     font-size: 14px;
+
     img{
       .yuanzheng(60px);
       vertical-align: middle;
@@ -393,12 +411,25 @@ li:after, div:after, ul:after{
     padding: 0;
     list-style: none;
   }
-  li{
+  .search-cont li,.search-result li{
     line-height:40px;
     font-size: 14px;
     padding: 0 20px;
+    color: @fontColor;
+    .liLeft{
+      width:200px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+    .liRight{
+      width:200px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
   }
-  li:hover{
+  .search-cont li:hover,.search-result li:hover{
     background-color: rgba(88,153,252,0.1);
   }
   .search-result{
@@ -434,7 +465,7 @@ li:after, div:after, ul:after{
   .search-cont{
     position: absolute;
     top:50px;
-    width: 440px;
+    width: 480px;
     max-height: 450px;
     overflow-y: auto;
     text-align: center;
@@ -457,6 +488,10 @@ li:after, div:after, ul:after{
       height: 40px;
     }
   }
+  .lhColor{
+    color: #5899FC;
+    text-decoration: underline;
+  }
 }
 .p-giveOther{
   li{
@@ -466,3 +501,5 @@ li:after, div:after, ul:after{
     background-color: rgba(88,153,252,0.1);
   }
 }
+
+
